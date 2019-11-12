@@ -47,10 +47,60 @@ function generatePassword() {
         finalPassword = finalPassword + randomSym + randomLower;
         passwordDisplay.innerHTML = finalPassword;
       }
-      else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === false)
+      else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === false) {
         finalPassword = finalPassword + randomSym;
         passwordDisplay.innerHTML = finalPassword;
-    }
+      }
+      else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === false) {
+      finalPassword = finalPassword + randomSym + randomUpper;
+      passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === true) {
+        finalPassword = finalPassword + randomSym + randomUpper + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === true) {
+        finalPassword = finalPassword + randomSym + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === true && lowerWanted === true && upperWanted === false && numWanted === true) {
+        finalPassword = finalPassword + randomSym + randomLower + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === false && upperWanted === false && numWanted === true) {
+        finalPassword = finalPassword + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === true) {
+        finalPassword = finalPassword + randomUpper + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
+        finalPassword = finalPassword + upperWanted;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === true) {
+        finalPassword = finalPassword + randomLower + randomUpper + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
+        finalPassword = finalPassword + randomUpper;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === false) {
+        finalPassword = finalPassword + randomLower + randomUpper;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === false) {
+        finalPassword = finalPassword + randomLower;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === true) {
+        finalPassword = finalPassword + randomLower + randomNums;
+        passwordDisplay.innerHTML = finalPassword;
+      }
+      }
+      
        
 
     console.log(randomLowerIndex + " = random lower index");
