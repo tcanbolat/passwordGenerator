@@ -19,7 +19,9 @@ function generatePassword() {
     var finalPassword = "";
     var passwordDisplay = document.getElementById("password");
     passwordDisplay.innerHTML = finalPassword;
+    
 
+    for (var i=0; i<numChars; i++) {
     var randomLowerIndex = Math.floor( Math.random() * lowerArr.length );
     var randomLower = lowerArr[randomLowerIndex];
 
@@ -34,72 +36,58 @@ function generatePassword() {
    
 
 
-    for (var i=0; i<numChars; i++) {
+
       if (symbWanted === true && lowerWanted === true && upperWanted === true && numWanted === true)  {
         finalPassword = finalPassword + randomNums + randomSym + randomUpper + randomLower;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === true && upperWanted === true && numWanted === false) {
         finalPassword = finalPassword + randomSym + randomUpper + randomLower;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === true && upperWanted === false && numWanted === false) {
         finalPassword = finalPassword + randomSym + randomLower;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === false) {
         finalPassword = finalPassword + randomSym;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === false) {
       finalPassword = finalPassword + randomSym + randomUpper;
-      passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === true) {
         finalPassword = finalPassword + randomSym + randomUpper + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === true) {
         finalPassword = finalPassword + randomSym + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === true && lowerWanted === true && upperWanted === false && numWanted === true) {
         finalPassword = finalPassword + randomSym + randomLower + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === false && upperWanted === false && numWanted === true) {
         finalPassword = finalPassword + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === true) {
         finalPassword = finalPassword + randomUpper + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
         finalPassword = finalPassword + upperWanted;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === true) {
         finalPassword = finalPassword + randomLower + randomUpper + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
         finalPassword = finalPassword + randomUpper;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === false) {
         finalPassword = finalPassword + randomLower + randomUpper;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === false) {
         finalPassword = finalPassword + randomLower;
-        passwordDisplay.innerHTML = finalPassword;
       }
       else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === true) {
         finalPassword = finalPassword + randomLower + randomNums;
-        passwordDisplay.innerHTML = finalPassword;
       }
-      }
+    }
+
+    passwordDisplay.innerHTML = finalPassword;
       
        
 
