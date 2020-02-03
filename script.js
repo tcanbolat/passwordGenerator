@@ -1,114 +1,141 @@
+const specialCharacters = ["@","%","+","\\","/","'","!","#","$","^","?",":",",",")","(","}","{","]","[","~","-","_","."];
+const numericCharacters = ["0","1","2","3","4","5","6","7","8","9"];
+const lowerCasedCharacters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+const upperCasedCharacters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+function getPasswordOptions() {
+
+  const length = parseInt(prompt(
+    "How many characters would you like your password to contain?"
+  ));
+
+  if (isNaN(length) === true) {
+    alert("Password length must be provided as a number");
+    return;
+  }
+
+  if (length < 8) {
+    alert("Password length must be at least 8 characters");
+    return;
+  }
+
+  if (length > 128) {
+    alert("Password length must less than 129 characters");
+    return;
+  }
+
+  const hasSpecialCharacters = confirm(
+    "Click OK to confirm including special characters."
+  );
+
+  const hasNumericCharacters = confirm(
+    "Click OK to confirm including numeric characters."
+  );
+
+  const hasLowerCasedCharacters = confirm(
+    "Click OK to confirm including lowercase characters."
+  );
+
+  const hasUpperCasedCharacters = confirm(
+    "Click OK to confirm including uppercase characters."
+  );
+
+  if (
+    hasSpecialCharacters === false &&
+    hasNumericCharacters === false &&
+    hasLowerCasedCharacters === false &&
+    hasUpperCasedCharacters === false
+  ) {
+    alert("Must select at least one character type");
+    return;
+  }
+
+  const passwordOptions = {
+    length: length,
+    hasSpecialCharacters: hasSpecialCharacters,
+    hasNumericCharacters: hasNumericCharacters,
+    hasLowerCasedCharacters: hasLowerCasedCharacters,
+    hasUpperCasedCharacters: hasUpperCasedCharacters
+  };
+
+  return passwordOptions;
+}
+
+function getRandom(arr) {
+  const randIndex = Math.floor(Math.random() * arr.length);
+  const randElement = arr[randIndex];
+
+  return randElement;
+}
+
 function generatePassword() {
-    var numChars = (function ask() {
-      var n = prompt('How many number of characters do you want? 8 - 128');
-      return isNaN(n) || +n > 128 || +n < 8 ? ask() : n;
-      }());
-    var symbWanted = confirm("Do you want special chars?");
-    var lowerWanted = confirm("Do you want lowercase chars?");
-    var upperWanted = confirm("Do you want uppercase chars?");
-    var numWanted = confirm("Do you want numbers?");
+  const options = getPasswordOptions();
+  const result = [];
 
-    var numsArr = [1,2,3,4,5,6,7,8,9,0];
-    var lowerArr = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","y","x","z"];
-    var upperArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-    var symbolArr = ["`","~","!","@","#","$","%","^","&","*","(",")","-","_","=","+"];
+  let possibleCharacters = [];
+
+  const guaranteedCharacters = [];
 
 
+  if (options.hasSpecialCharacters) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    guaranteedCharacters.push(getRandom(specialCharacters));
+  }
 
 
-    var finalPassword = "";
-    var passwordDisplay = document.getElementById("password");
-    passwordDisplay.innerHTML = finalPassword;
-    
+  if (options.hasNumericCharacters) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+    guaranteedCharacters.push(getRandom(numericCharacters));
+  }
 
-    for (var i=0; i<numChars; i++) {
-    var randomLowerIndex = Math.floor( Math.random() * lowerArr.length );
-    var randomLower = lowerArr[randomLowerIndex];
-
-    var randomUpperIndex = Math.floor( Math.random() * upperArr.length );
-    var randomUpper = upperArr[randomUpperIndex];
-
-    var randomNumsIndex = Math.floor( Math.random() * numsArr.length );
-    var randomNums = numsArr[randomNumsIndex];
-
-    var randomSymIndex = Math.floor( Math.random() * symbolArr.length );
-    var randomSym = symbolArr[randomSymIndex]; 
-   
+  if (options.hasLowerCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+    guaranteedCharacters.push(getRandom(lowerCasedCharacters));
+  }
 
 
+  if (options.hasUpperCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+    guaranteedCharacters.push(getRandom(upperCasedCharacters));
+  }
 
-      if (symbWanted === true && lowerWanted === true && upperWanted === true && numWanted === true)  {
-        finalPassword = finalPassword + randomNums + randomSym + randomUpper + randomLower;
-      }
-      else if(symbWanted === true && lowerWanted === true && upperWanted === true && numWanted === false) {
-        finalPassword = finalPassword + randomSym + randomUpper + randomLower;
-      }
-      else if(symbWanted === true && lowerWanted === true && upperWanted === false && numWanted === false) {
-        finalPassword = finalPassword + randomSym + randomLower;
-      }
-      else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === false) {
-        finalPassword = finalPassword + randomSym;
-      }
-      else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === false) {
-      finalPassword = finalPassword + randomSym + randomUpper;
-      }
-      else if(symbWanted === true && lowerWanted === false && upperWanted === true && numWanted === true) {
-        finalPassword = finalPassword + randomSym + randomUpper + randomNums;
-      }
-      else if(symbWanted === true && lowerWanted === false && upperWanted === false && numWanted === true) {
-        finalPassword = finalPassword + randomSym + randomNums;
-      }
-      else if(symbWanted === true && lowerWanted === true && upperWanted === false && numWanted === true) {
-        finalPassword = finalPassword + randomSym + randomLower + randomNums;
-      }
-      else if(symbWanted === false && lowerWanted === false && upperWanted === false && numWanted === true) {
-        finalPassword = finalPassword + randomNums;
-      }
-      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === true) {
-        finalPassword = finalPassword + randomUpper + randomNums;
-      }
-      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
-        finalPassword = finalPassword + upperWanted;
-      }
-      else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === true) {
-        finalPassword = finalPassword + randomLower + randomUpper + randomNums;
-      }
-      else if(symbWanted === false && lowerWanted === false && upperWanted === true && numWanted === false) {
-        finalPassword = finalPassword + randomUpper;
-      }
-      else if(symbWanted === false && lowerWanted === true && upperWanted === true && numWanted === false) {
-        finalPassword = finalPassword + randomLower + randomUpper;
-      }
-      else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === false) {
-        finalPassword = finalPassword + randomLower;
-      }
-      else if(symbWanted === false && lowerWanted === true && upperWanted === false && numWanted === true) {
-        finalPassword = finalPassword + randomLower + randomNums;
-      }
-    }
+  for (let i = 0; i < options.length; i++) {
+    const possibleCharacter = getRandom(possibleCharacters);
 
-    passwordDisplay.innerHTML = finalPassword;
-      
-       
+    result.push(possibleCharacter);
+  }
 
-    console.log(randomLowerIndex + " = random lower index");
-    console.log(randomLower + " = random lower");
+  for (let i = 0; i < guaranteedCharacters.length; i++) {
+    result[i] = guaranteedCharacters[i];
+  }
 
-    console.log(randomNumsIndex + " = random number index");
-    console.log(randomNums + " = random number");
-
-
-    console.log(numChars + " = password length");
-    console.log(symbWanted + " = special chars");
-    console.log(lowerWanted + " = lower chars");
-    console.log(upperWanted + " = upper chars");
-    console.log(numWanted + " = num chars");
-    console.log(finalPassword);
+  return result.join("");
 }
 
-function copyFunction() {
-  var copyText = document.getElementById("password");
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
+const copyBtn = document.querySelector("#copy");
+const generateBtn = document.querySelector("#generate");
+
+function writePassword() {
+  const password = generatePassword();
+  const passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+  copyBtn.removeAttribute("disabled");
+  copyBtn.focus();
+}
+
+function copyToClipboard() {
+  const passwordText = document.querySelector("#password");
+
+  passwordText.select();
   document.execCommand("copy");
+
+  alert(
+    "Your password was copied to your clipboard."
+  );
 }
+
+generateBtn.addEventListener("click", writePassword);
+
+copyBtn.addEventListener("click", copyToClipboard);
